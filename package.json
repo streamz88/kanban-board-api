@@ -1,0 +1,41 @@
+{
+  "name": "kanban-api",
+  "version": "1.0.0",
+  "description": "Project management endpoints",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "rimraf dist && babel src -d dist",
+    "serve": "npm run build && node --inspect dist/server.js",
+    "watch": "nodemon -w src --exec npm run serve",
+    "precommit": "pretty-quick --staged"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/polyfill": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/register": "^7.4.0",
+    "chalk": "^2.4.2",
+    "cucumber": "^5.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^24.7.1",
+    "joi": "^14.3.1",
+    "nodemon": "^1.18.10",
+    "prettier": "^1.16.4",
+    "pretty-quick": "^1.10.0",
+    "rimraf": "^2.6.3",
+    "superagent": "^5.0.2"
+  }
+}
