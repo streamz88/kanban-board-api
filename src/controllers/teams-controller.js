@@ -20,4 +20,31 @@ TeamsRouter.get(
   })
 );
 
+TeamsRouter.get(
+  "/:id",
+  asyncWrapper(async (req, res) => {
+    const { id } = req.params;
+    let teams = await teamsService.findOne(id);
+
+    res.send(teams);
+  })
+);
+
+TeamsRouter.post(
+  "/",
+  asyncWrapper(async (req, res) => {
+    const team = await teamsService.create(req.body);
+    res.send(team);
+  })
+);
+
+TeamsRouter.delete(
+  "/:id",
+  asyncWrapper(async (req, res) => {
+    const { id } = req.params;
+    await teamsService.deleteOne(id);
+    res.sendStatus(200);
+  })
+);
+
 export default TeamsRouter;
