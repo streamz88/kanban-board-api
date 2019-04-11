@@ -8,7 +8,7 @@ export default class TeamsService {
   }
 
   async create(team) {
-    return [];
+    return {};
   }
 
   async deleteOne(id) {

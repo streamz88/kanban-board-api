@@ -32,6 +32,7 @@ TeamsRouter.get(
 
 TeamsRouter.post(
   "/",
+  [validator("Team")],
   asyncWrapper(async (req, res) => {
     const team = await teamsService.create(req.body);
     res.send(team);

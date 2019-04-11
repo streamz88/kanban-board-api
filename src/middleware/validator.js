@@ -1,10 +1,10 @@
 import Joi from "joi";
 import TeamValidationSchema from "../models/team";
-
+import ValidationError from "../errors/validation-error";
 ("use strict");
 
 let validators = {
-  Team: { TeamValidationSchema }
+  Team: { scopes: { default: TeamValidationSchema } }
 };
 
 const scopeExists = (validator, scope) => {
@@ -19,14 +19,10 @@ const getSchema = (model, scope) => {
 
   if (validator.scopes) {
     if (scope) {
-      if (scope) {
-        if (!scopeExists(validator, scope)) {
-          throw new Error(
-            `Scope ${scope} does not exist in ${model} validator`
-          );
-        } else {
-          return validator.scopes[scope];
-        }
+      if (!scopeExists(validator, scope)) {
+        throw new Error(`Scope ${scope} does not exist in ${model} validator`);
+      } else {
+        return validator.scopes[scope];
       }
     } else {
       return validator.scopes.default;
@@ -44,7 +40,7 @@ const ValidatonMiddleware = (model, scope) => {
   return (req, res, next) => {
     const validationResult = validate(model, req.body, scope);
     if (validationResult.error) {
-      throw new Error(validationResult.error.message);
+      throw new ValidationError(validationResult.error.message, model);
     } else {
       next();
     }
